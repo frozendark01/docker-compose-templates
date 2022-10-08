@@ -1,0 +1,24 @@
+version: "2.4"
+services:
+  tailscale:
+      privileged: true
+      hostname: tailscale                                          # This will become the tailscale device name
+      network_mode: "host"
+      container_name: tailscale
+      image: tailscale/tailscale:latest
+      volumes:
+          - "/opt/appdata/tailscale/var_lib:/var/lib"        # State data will be stored in this directory
+          - "/dev/net/tun:/dev/net/tun"                      # Required for tailscale to work
+      cap_add:                                               # Required for tailscale to work
+        - net_admin
+        - sys_module
+      command: tailscaled
+      restart: unless-stopped
+
+     ## Info!
+      # Make sure you are in the same directory as the docker-compose.yml file, and now we want to start up the container(s) by running the following in each directory:
+      # docker-compose up -d
+      # If you're in another directory, then you will need to specify the compose file with the -f argument.
+      # docker-compose -f /opt/appdata/tailscale/docker-compose.yml up -d
+      # Run the following to have the abilityfor your Host device to be the Exit Node
+      # docker exec tailscale tailscale up --advertise-exit-node
