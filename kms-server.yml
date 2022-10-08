@@ -1,0 +1,8 @@
+version: '3.3'
+services:
+    kmsserver:
+        ports:
+            - '1688:1688'
+        restart: always
+        container_name: vlmcsd
+        image: fr0zendark/kmsserver
