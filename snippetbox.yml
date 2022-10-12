@@ -1,0 +1,9 @@
+version: '3.3'
+services:
+    snippet-box:
+        container_name: snippetbox
+        ports:
+            - '5000:5000'
+        volumes:
+            - <path-to-data>:/app/data' #map to wherever you want to map
+        image: pawelmalak/snippet-box
