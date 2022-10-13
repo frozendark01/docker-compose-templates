@@ -1,0 +1,19 @@
+version: '2'
+
+volumes:
+  configs:
+  trash:
+
+services:
+  dupeguru:
+    image: jlesage/dupeguru
+    ports:
+      - 5800:5800
+    environment:
+      - TZ=America/Denver
+      - PUID=1026
+      - PGID=100
+    volumes:
+      - configs:/config:rw
+      - /path/to/storage/files:/storage:rw
+      - trash:/trash:rw
