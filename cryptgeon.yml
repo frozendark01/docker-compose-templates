@@ -1,0 +1,36 @@
+version: '3'
+services:
+  npm:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+    networks:
+      nginxproxymanager_default:
+
+  redis:
+    image: redis:7-alpine
+    networks:
+      nginxproxymanager_default:
+
+
+  cryptgeon:
+    image: cupcakearmy/cryptgeon:latest
+    depends_on:
+      - redis
+    environment:
+      SIZE_LIMIT: 16 MiB
+    ports:
+      - 5000:5000
+    networks:
+      nginxproxymanager_default:
+
+
+networks:
+  nginxproxymanager_default:
+    external: false
