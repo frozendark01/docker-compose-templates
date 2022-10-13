@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  rancher:
+    image: rancher/rancher:latest
+    restart: unless-stopped
+    ports:
+      - '443:443'
+      - '80:80'
+    volumes:
+      - rancher-vol:/var/lib/rancher
+
+volumes:
+  rancher-vol:
