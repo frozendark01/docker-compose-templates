@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+  dash:
+    image: mauricenino/dashdot:latest
+    restart: unless-stopped
+    environment:
+      DASHDOT_ENABLE_CPU_TEMPS: 'true'
+    privileged: true
+    ports:
+      - '80:3001'
+    volumes:
+      - /:/mnt/host:ro
