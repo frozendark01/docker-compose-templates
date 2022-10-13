@@ -1,0 +1,18 @@
+---
+version: "2.1"
+
+volumes:
+  homeassistant:
+
+services:
+  homeassistant:
+    image: homeassistant/home-assistant
+    network_mode: "host"
+    container_name: homeassistant
+    volumes:
+      - homeassistant:/config
+    environment:
+      - TZ=America/Denver
+    ports:
+      - 8123:8123
+    restart: unless-stopped
