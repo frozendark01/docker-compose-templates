@@ -1,0 +1,14 @@
+---
+version: "2.1"
+volumes:
+  guacamoleconf:
+
+services:
+  guacamole:
+    image: oznu/guacamole
+    container_name: guacamole
+    volumes:
+      - guacamoleconf:/config
+    ports:
+      - 8585:8080 #edit 8585 as necessary for your setup
+    restart: unless-stopped
