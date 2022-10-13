@@ -1,0 +1,14 @@
+version: '2'
+services:
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    environment:
+      - AUDIOBOOKSHELF_UID=998 #change to match your server
+      - AUDIOBOOKSHELF_GID=100 #change to match your server
+    ports:
+      - 13378:80 #do not change :80
+    volumes:
+      - /path/to/location/AudioBookShelf/AudioBooks:/audiobooks #map to your serverlocations
+      - /path/to/location/AudioBookShelf/Podcasts:/podcasts #map to your serverlocations
+      - /path/to/location/AudioBookShelf/Config:/config #map to your serverlocations
+      - /path/to/location/AudioBookShelf/MetaData:/metadata #map to your serverlocations
