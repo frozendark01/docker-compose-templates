@@ -1,0 +1,12 @@
+version: '3.3'
+services:
+    trilium:
+        ports:
+            - '8482:8080'
+        volumes:
+            - 'trilium-data:/home/node/trilium-data'
+        image: 'zadam/trilium:latest'
+        restart: always
+
+volumes:
+  trilium-data:
