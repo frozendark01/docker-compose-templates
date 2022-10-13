@@ -1,0 +1,29 @@
+version: '2'
+
+volumes:
+  HumHubConfig:
+  HumHubUploads:
+  HubHumModules:
+
+services:
+  humhub:
+    image: mriedmann/humhub:1.6.2
+    links:
+      - db:db
+    ports:
+      - 8484:80
+    volumes:
+      - HumHubConfig:/var/www/localhost/htdocs/protected/config
+      - HumHubUploads:/var/www/localhost/htdocs/uploads
+      - HumHubModules:/var/www/localhost/htdocs/protected/modules
+    environment:
+      HUMHUB_DB_USER: humhub
+      HUMHUB_DB_PASSWORD: humhub
+
+  db:
+    image: mariadb:10.2
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: humhub
+      MYSQL_USER: humhub
+      MYSQL_PASSWORD: humhub
