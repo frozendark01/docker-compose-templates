@@ -1,39 +1,16 @@
-version: '2'
-
-volumes:
-    nextcloud:
-    db:
+---
+version: "2.1"
 services:
-    db:
-         image: mariadb:10.5
-         restart: unless-stopped
-         command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
-         volumes:
-             - db:/var/lib/mysql
-         ports:
-             - 3306:3306
-         environment:
-             - MYSQL_ROOT_PASSWORD=somepassword
-             - MYSQL_PASSWORD=somepassword
-             - MYSQL_DATABASE=nextcloud
-             - MYSQL_USER=nextcloud
-
-    app:
-      image: lscr.io/linuxserver/nextcloud:latest
-      container_name: nextcloud
-      environment:
-         - PUID=1000
-         - PGID=1000
-         - TZ=Europe/London
-         - MYSQL_PASSWORD=somepassword
-         - MYSQL_DATABASE=nextcloud
-         - MYSQL_USER=nextcloud
-         - MYSQL_HOST=db
-      volumes:
-        - <path-to-data>/appdata:/config
-        - <path-to-data>/data:/data
-      ports:
-        - 443:443
-      links:
-        - db
-      restart: unless-stopped
+  nextcloud:
+    image: lscr.io/linuxserver/nextcloud:latest
+    container_name: nextcloud
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - /path/to/appdata:/config
+      - /path/to/data:/data
+    ports:
+      - 443:443
+    restart: unless-stopped
