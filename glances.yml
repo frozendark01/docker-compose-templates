@@ -1,6 +1,6 @@
 version: '3.3'
 services:
-    nicolargo:
+    glances:
         restart: always
         ports:
             - '61208-61209:61208-61209'
@@ -9,4 +9,4 @@ services:
         volumes:
             - '/var/run/docker.sock:/var/run/docker.sock:ro'
         pid: host
-        image: docker.io/nicolargo/glances
+        image: 'nicolargo/glances:latest-full'
