@@ -1,0 +1,12 @@
+version: '3.3'
+services:
+    nicolargo:
+        restart: always
+        ports:
+            - '61208-61209:61208-61209'
+        environment:
+            - GLANCES_OPT=-w
+        volumes:
+            - '/var/run/docker.sock:/var/run/docker.sock:ro'
+        pid: host
+        image: docker.io/nicolargo/glances
