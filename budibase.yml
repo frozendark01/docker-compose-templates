@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+    budibase:
+        container_name: budibase
+        ports:
+            - '10000:80'
+        volumes:
+            - '/volume1/docker/budibase:/data'
+        restart: always
+        image: budibase/budibase
