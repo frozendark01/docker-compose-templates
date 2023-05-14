@@ -1,0 +1,20 @@
+version: "3"
+services:
+    dsm:
+        container_name: dsm
+        image: kroese/virtual-dsm:latest
+        environment:
+            CPU_CORES: "1"
+            DISK_SIZE: "700G"
+            RAM_SIZE: "512M"
+        devices:
+            - /dev/kvm
+            - /dev/vhost-net
+        cap_add:
+            - NET_ADMIN        
+        ports:
+            - 5000:5000
+        volumes:
+            - /home/user/data:/storage
+        restart: on-failure
+        stop_grace_period: 1m
